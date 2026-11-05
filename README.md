@@ -1,4 +1,4 @@
-# Tamim — UI/UX & Product Designer Portfolio
+# Ebrahim — Flutter Developer Portfolio
 
 Next.js 16 + Tailwind CSS v4 single-page portfolio with a sidebar layout, one-section-at-a-time navigation (`/#about`, `/#portfolio`, …), dark/light themes, preloader, magic cursor, filterable portfolio with project modals and a working contact form.
 
