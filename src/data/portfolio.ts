@@ -43,7 +43,7 @@ export const profile = {
     name: "Ebrahim",
     fullName: "Md Ebrahim Hossen",
     initials: "EH",
-    avatar: "", // e.g. "/images/avatar.jpg"
+    avatar: "/images/avatar.jpg",
     roles: ["Flutter Developer", "Mobile App Developer", "Software Engineer", "Dart Enthusiast"],
     shortRole: "Flutter Developer",
     status: "Open to new opportunities — remote & onsite",
@@ -51,7 +51,7 @@ export const profile = {
     email: "ebrahim.cse.bu@gmail.com",
     phone: "+880 1795-112198",
     phoneHref: "tel:+8801795112198",
-    resumeUrl: "/resume.pdf", // drop your CV into /public/resume.pdf
+    resumeUrl: "https://drive.google.com/uc?export=download&id=1P7f_3tA_D_3TcYdq0o9zRHrSkiSAyVOY",
     tagline: "I build cross-platform mobile apps with Flutter.",
     bio: [
         "I'm a [[Flutter Developer]] and Software Engineer who builds fast, reliable cross-platform mobile apps for Android and iOS from a single Dart codebase.",
@@ -217,6 +217,25 @@ const appStore = (path: string) => ({ label: "App Store", href: `https://apps.ap
 
 export const projects: Project[] = [
     {
+        id: "limitit",
+        title: "LimitIt",
+        client: "LimitIt Studio",
+        category: "Android",
+        year: "2026",
+        role: "Flutter Developer",
+        duration: "—",
+        short: "A digital-wellbeing app that curbs social media overuse with smart limits and opening timers.",
+        description: [
+            "LimitIt helps people reduce compulsive social media use without deleting their favourite apps. Users set smart daily limits and mindful opening timers, and get clear weekly reports on where their time goes.",
+            "Limits are enforced on-device through Android's AccessibilityService, which only detects foreground app changes. No screen content is read or stored, and nothing is sent to a server, keeping the app privacy-first.",
+        ],
+        highlights: ["Delay app opening with a mindful pause", "Daily time limits per app", "Opening-count limits", "Scheduled time blocks", "Weekly usage reports", "Privacy-first, on-device enforcement"],
+        tools: ["Flutter", "Dart", "Android Accessibility API"],
+        color: ["#1f4d1a", "#5a9e2f"],
+        screenshots: [1, 2, 3, 4, 5].map((n) => `/images/limitit/shot-${n}.webp`),
+        links: [play("com.limitit.digitalbalance")],
+    },
+    {
         id: "klokk-in",
         title: "Klokk-in",
         client: "Atomic Tractor Ltd",
@@ -224,13 +243,15 @@ export const projects: Project[] = [
         year: "2026",
         role: "Flutter Developer",
         duration: "—",
-        short: "A storytelling app for recording, sharing and keeping memories from working life.",
+        short: "A digital storytelling app for recording, sharing and preserving memories from working life.",
         description: [
-            "Klokk-in lets people record and preserve memories from their working life and industry. Users can write or upload stories with photos and browse stories from their community.",
+            "Klokk-in is a digital storytelling app that helps people record, share and preserve their memories, especially from working life and industry. Whether someone spent their career in a factory, on the tools or behind the scenes, their story gets a permanent home.",
+            "Built with an easy-to-use interface for all ages, every story becomes part of a growing community archive that preserves the experiences, skills and spirit of industry for future generations.",
         ],
-        highlights: ["Record memories in your own voice", "Stories with photos", "Tag by company, trade or decade", "Community story feed"],
+        highlights: ["Record memories in your own voice", "Create audio & video stories", "Write or upload stories with photos", "Tag by company, trade or decade", "Browse a community story feed", "Accessible UI for all ages"],
         tools: ["Flutter", "Dart"],
-        color: ["#4f46e5", "#06b6d4"],
+        color: ["#8a5a12", "#d99a2b"],
+        screenshots: [1, 2, 3, 4, 5, 6].map((n) => `/images/klokk-in/shot-${n}.webp`),
         links: [play("com.atomictractorltd.klookin"), appStore("klokk-in/id6757183834")],
     },
     {
@@ -376,7 +397,7 @@ export const education: TimelineItem[] = [
 /* --------------------------------- updates -------------------------------- */
 export const facts = [
     { value: 2, suffix: "+", label: "Years in Industry", icon: FaBriefcase },
-    { value: 7, suffix: "", label: "Apps on Google Play", icon: FaGooglePlay },
+    { value: 8, suffix: "", label: "Apps on Google Play", icon: FaGooglePlay },
     { value: 4, suffix: "", label: "Apps on App Store", icon: FaAppStoreIos },
     { value: 2, suffix: "+", label: "Years of Research", icon: FaStar },
 ];

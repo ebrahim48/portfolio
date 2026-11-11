@@ -1,5 +1,5 @@
 "use client";
-import { useMemo, useState } from "react";
+import { useMemo, useState, type ReactNode } from "react";
 import { FaBehance, FaDribbble, FaFigma, FaGooglePlay, FaAppStoreIos, FaGithub, FaArrowUpRightFromSquare, FaChevronLeft, FaChevronRight, FaMagnifyingGlass, FaRegClock, FaUser, FaCalendar } from "react-icons/fa6";
 import { projects, type Project, type ProjectCategory } from "@/src/data/portfolio";
 import FilterTabs from "../ui/FilterTabs";
@@ -12,7 +12,45 @@ const LINK_ICONS = { behance: FaBehance, dribbble: FaDribbble, figma: FaFigma, l
 function Cover({ project, variant = 0, src }: { project: Project; variant?: number; src?: string }) {
     // eslint-disable-next-line @next/next/no-img-element
     if (src) return <img src={src} alt={project.title} className="w-full h-full object-cover" />;
+    if (project.screenshots?.length) return <Showcase project={project} />;
     return <Mockup project={project} variant={variant} />;
+}
+
+/** Brand gradient backdrop shared by real-screenshot covers. */
+function Backdrop({ project, children }: { project: Project; children: ReactNode }) {
+    const [c1, c2] = project.color;
+    return (
+        <div className="relative w-full h-full overflow-hidden" style={{ background: `linear-gradient(135deg, ${c1}, ${c2})` }}>
+            <div className="absolute inset-0 opacity-20" style={{ backgroundImage: "radial-gradient(circle at 20% 20%, #fff 0, transparent 40%), radial-gradient(circle at 80% 90%, #000 0, transparent 45%)" }} />
+            {children}
+        </div>
+    );
+}
+
+/** Card cover: three real store screenshots fanned out on the brand gradient. */
+function Showcase({ project }: { project: Project }) {
+    const shots = project.screenshots!.slice(0, 3);
+    return (
+        <Backdrop project={project}>
+            <div className="absolute inset-0 flex items-center justify-center gap-[4%] px-[6%]">
+                {shots.map((s, i) => (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img key={s} src={s} alt={`${project.title} screenshot ${i + 1}`} loading="lazy"
+                        className={`w-[27%] aspect-[416/900] object-cover rounded-[10%/5%] shadow-2xl ring-1 ring-white/20 ${shots.length === 3 && i === 1 ? "scale-110 z-10" : "opacity-90 translate-y-3"}`} />
+                ))}
+            </div>
+        </Backdrop>
+    );
+}
+
+/** Modal slide: one full, uncropped screenshot centred on the brand gradient. */
+function Screen({ project, src }: { project: Project; src: string }) {
+    return (
+        <Backdrop project={project}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={src} alt={project.title} className="absolute inset-y-[5%] left-1/2 -translate-x-1/2 h-[90%] w-auto rounded-2xl shadow-2xl ring-1 ring-white/20" />
+        </Backdrop>
+    );
 }
 
 export default function Portfolio() {
@@ -103,7 +141,7 @@ function ProjectModal({ project, onClose }: { project: Project | null; onClose: 
         >
             {/* gallery */}
             <div className="relative aspect-video rounded-xl overflow-hidden border border-line">
-                <Cover project={project} variant={slide} src={shots[slide]} />
+                {shots[slide] ? <Screen project={project} src={shots[slide]} /> : <Cover project={project} variant={slide} />}
                 {shots.length > 1 && (
                     <>
                         <button onClick={() => go(-1)} aria-label="Previous" className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 grid place-items-center rounded-full bg-black/60 text-white hover:bg-black/80 cursor-pointer"><FaChevronLeft /></button>

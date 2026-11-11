@@ -4,7 +4,7 @@ export default function Avatar({ size = 96, className = "", rounded = "rounded-f
     const style = { width: size, height: size };
     if (profile.avatar) {
         // eslint-disable-next-line @next/next/no-img-element
-        return <img src={profile.avatar} alt={profile.name} style={style} className={`${rounded} object-cover ${className}`} />;
+        return <img src={profile.avatar} alt={profile.name} style={style} className={`${rounded} object-cover object-[50%_20%] ${className}`} />;
     }
     return (
         <div

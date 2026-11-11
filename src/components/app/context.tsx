@@ -69,6 +69,11 @@ export function AppProvider({ children, resumeUrl }: { children: ReactNode; resu
     }, [magicCursor, notify]);
 
     const downloadResume = useCallback(async () => {
+        // External links (e.g. Google Drive) can't be checked via fetch due to CORS
+        if (/^https?:\/\//.test(resumeUrl)) {
+            window.open(resumeUrl, "_blank", "noopener,noreferrer");
+            return;
+        }
         try {
             const res = await fetch(resumeUrl, { method: "HEAD" });
             if (!res.ok) throw new Error();

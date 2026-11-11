@@ -34,7 +34,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             <head>
                 <script dangerouslySetInnerHTML={{ __html: themeScript }} />
             </head>
-            <body className={`${lato.variable} ${saira.variable} ${orbitron.variable} antialiased`}>
+            <body className={`${lato.variable} ${saira.variable} ${orbitron.variable} antialiased`} suppressHydrationWarning>
                 {children}
             </body>
         </html>
